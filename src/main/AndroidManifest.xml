@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+      package="com.razorpay.sampleapp"
+      android:versionCode="8"
+      android:versionName="1.5">
+    <application android:icon="@mipmap/ic_launcher" android:label="Razorpay Sample App" android:theme="@android:style/Theme.Material.Light.NoActionBar">
+        <activity android:name="PaymentActivity" android:label="Razorpay Sample App">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name="com.razorpay.CheckoutActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="0690e21ca12465fe7f3991b05d45fef1cf97758a" />
+    </application>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+</manifest>
