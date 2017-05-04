@@ -4,34 +4,55 @@ import android.app.Activity;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
+import android.view.View;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 import android.webkit.WebView;
+
+import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Iterator;
 import java.util.Map;
 import android.util.Log;
 
 import com.razorpay.Razorpay;
 import com.razorpay.RazorpayWebViewClient;
+import com.razorpay.sampleapp.fragments.PaymentMethodFragment;
 
 public class PaymentActivity extends Activity {
     private Razorpay razorpay;
     private WebView webview;
     private JSONObject payload;
     private Activity activity;
-    private static final String TAG = PaymentActivity.class.getName();
+    PaymentMethods paymentMethods;
+    RelativeLayout methodsLayout;
+    ViewPager viewPager;
+    Button payButton;
+    boolean inPayment = true;
+    PaymentMethodPagerAdapter paymentMethodPagerAdapter;
+
+
+    public static final String TAG = PaymentActivity.class.getName();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.payment);
         activity = this;
+        setContentView(R.layout.activity_payment);
+        viewPager = (ViewPager) findViewById(R.id.vpPager);
+        payButton = (Button) findViewById(R.id.btn_pay);
+        methodsLayout = (RelativeLayout) findViewById(R.id.rl_methods);
         initRazorpay();
         createWebView();
-
-        /**
-         * Through user action, initiate the payment
-         */
-        initiatePayment();
+        payButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                initiatePayment();
+            }
+        });
     }
 
     private void initRazorpay() {
@@ -46,18 +67,19 @@ public class PaymentActivity extends Activity {
             public void onError(int i, String s) {
                 Toast.makeText(activity, "Error " + Integer.toString(i) + ": " + s, Toast.LENGTH_SHORT).show();
                 Log.d("com.example", "onError: " + Integer.toString(i) + ": " + s);
-                finish();
+                resetPayment();
+            }
+
+            @Override
+            public void paymentMethodsCallback(String s) {
+                paymentMethods = new PaymentMethods(s);
+                paymentMethodPagerAdapter = new PaymentMethodPagerAdapter(getFragmentManager(), paymentMethods);
+                viewPager.setAdapter(paymentMethodPagerAdapter);
             }
         };
-
+        razorpay.getPaymentMethods();
     }
 
-    /**
-     * How you create webview, programmatically or otherwise,
-     * Razorpay only needs the reference
-     * <p>
-     * The settings shown below need to be set for payments to work
-     */
     private void createWebView() {
 
         webview = (WebView) activity.findViewById(R.id.payment_webview);
@@ -154,14 +176,6 @@ public class PaymentActivity extends Activity {
              * 4 digits for amex, card starts with ^34 or ^37
              */
 
-            payload.put("method", "card");
-            payload.put("card[number]", "4111111111111111");
-            payload.put("card[expiry_month]", "11");
-            payload.put("card[expiry_year]", "22");
-            payload.put("card[name]", "Chetty");
-            payload.put("card[cvv]", "342");
-
-
             /**
              * If method = wallet
              *
@@ -172,7 +186,10 @@ public class PaymentActivity extends Activity {
              * paymentMethodsCallback()
              */
 
-
+            PaymentMethodFragment currentFragment = paymentMethodPagerAdapter.getCurrentFragment();
+            payload.put("method", currentFragment.getMethod());
+            payload = merge(payload, currentFragment.getMethodPayload());
+            Log.d(TAG, payload.toString());
             /**
              * notes: 15 in total
              * description: 255 characters
@@ -183,7 +200,10 @@ public class PaymentActivity extends Activity {
                 @Override
                 public void onValidationSuccess() {
                     try {
+                        methodsLayout.setVisibility(View.GONE);
+                        webview.setVisibility(View.VISIBLE);
                         razorpay.submit(payload);
+                        inPayment = true;
                     } catch (Exception e) {
                         Log.e("com.example", "Exception", e);
                     }
@@ -200,12 +220,51 @@ public class PaymentActivity extends Activity {
         }
     }
 
+    /**
+     * Merge two JSONObjects
+     * @param obj1
+     * @param obj2
+     */
+    private JSONObject merge(JSONObject obj1, JSONObject obj2) throws JSONException {
+        JSONObject mergedObj = new JSONObject();
+        Iterator<String> it1 = obj1.keys();
+        Iterator<String> it2 = obj2.keys();
+        String key;
+        while(it1.hasNext()) {
+            key = it1.next();
+            mergedObj.put(key, obj1.get(key));
+        }
+        while(it2.hasNext()) {
+            key = it2.next();
+            mergedObj.put(key, obj2.get(key));
+        }
+        return mergedObj;
+    }
+
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        if (razorpay != null) {
+        if(inPayment) {
+            Toast.makeText(this, "Payment cancelled", Toast.LENGTH_SHORT).show();
             razorpay.onBackPressed();
+            resetPayment();
+        }
+        else {
+            super.onBackPressed();
         }
     }
 
+    public PaymentMethods getPaymentMethods() {
+        return paymentMethods;
+    }
+
+    /**
+     * Reset the payment
+     * Hide the webview
+     * and show methods layout
+     */
+    public void resetPayment(){
+        inPayment = false;
+        webview.setVisibility(View.GONE);
+        methodsLayout.setVisibility(View.VISIBLE);
+    }
 }

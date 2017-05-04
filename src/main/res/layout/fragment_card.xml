@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:padding="16dp"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+
+    <TextView
+        android:id="@+id/tv_label"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:layout_width="wrap_content"
+        android:text="Enter card details"
+        android:layout_height="wrap_content"/>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_card_number"
+            android:layout_width="0dp"
+            android:layout_weight="0.6"
+            android:maxLength="16"
+            android:layout_height="wrap_content"
+            android:hint="4XXX XXXX XXXX XXXX"
+            />
+
+        <EditText
+            android:id="@+id/et_card_expiry_month"
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
+            android:layout_height="wrap_content"
+            android:hint="MM"
+            android:maxLength="2"
+            android:inputType="number"/>
+
+        <EditText
+            android:id="@+id/et_card_expiry_year"
+            android:layout_width="0dp"
+            android:layout_weight="0.2"
+            android:maxLength="2"
+            android:layout_height="wrap_content"
+            android:hint="YY"
+            android:inputType="number"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/et_card_name"
+            android:layout_width="0dp"
+            android:layout_weight="0.7"
+            android:layout_height="wrap_content"
+            android:hint="Name"/>
+
+        <EditText
+            android:id="@+id/et_card_cvv"
+            android:layout_width="0dp"
+            android:layout_weight="0.3"
+            android:maxLength="4"
+            android:layout_height="wrap_content"
+            android:hint="CVV"
+            android:inputType="numberPassword"/>
+    </LinearLayout>
+
+</LinearLayout>
