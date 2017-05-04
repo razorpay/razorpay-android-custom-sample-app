@@ -9,25 +9,23 @@
 
     <application
         android:icon="@mipmap/ic_launcher"
-        android:label="Razorpay Sample App"
-        android:theme="@android:style/Theme.Material.Light.NoActionBar">
+        android:label="Razorpay Sample App">
         <activity
             android:name=".PaymentActivity"
-            android:label="Razorpay Sample App">
+            android:label="Razorpay Payment">
         </activity>
-        <activity
-            android:name="com.razorpay.CheckoutActivity"
-            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
-
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-    </application>
 
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_live_ILgsfZCZoFIKMb"
+            />
+    </application>
 </manifest>
