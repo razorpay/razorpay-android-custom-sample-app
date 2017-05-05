@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
@@ -22,7 +23,7 @@ import com.razorpay.Razorpay;
 import com.razorpay.RazorpayWebViewClient;
 import com.razorpay.sampleapp.fragments.PaymentMethodFragment;
 
-public class PaymentActivity extends Activity {
+public class PaymentActivity extends AppCompatActivity {
     private Razorpay razorpay;
     private WebView webview;
     private JSONObject payload;
@@ -73,7 +74,7 @@ public class PaymentActivity extends Activity {
             @Override
             public void paymentMethodsCallback(String s) {
                 paymentMethods = new PaymentMethods(s);
-                paymentMethodPagerAdapter = new PaymentMethodPagerAdapter(getFragmentManager(), paymentMethods);
+                paymentMethodPagerAdapter = new PaymentMethodPagerAdapter(getSupportFragmentManager(), paymentMethods);
                 viewPager.setAdapter(paymentMethodPagerAdapter);
             }
         };

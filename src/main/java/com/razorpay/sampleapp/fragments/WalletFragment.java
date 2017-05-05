@@ -39,7 +39,8 @@ public class WalletFragment extends PaymentMethodFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_wallet, null);
         walletListSpinner = (Spinner) view.findViewById(R.id.spinner_wallet_list);
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, paymentMethods.getWalletList());
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, getPaymentMethods().getWalletList());
+        spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         walletListSpinner.setAdapter(spinnerAdapter);
         return view;
     }

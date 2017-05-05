@@ -1,9 +1,10 @@
 package com.razorpay.sampleapp;
 
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.support.v13.app.FragmentPagerAdapter;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
 import com.razorpay.sampleapp.fragments.CardFragment;
@@ -21,6 +22,7 @@ public class PaymentMethodPagerAdapter extends FragmentPagerAdapter {
         super(fm);
         this.methods = methods;
     }
+
 
     @Override
     public Fragment getItem(int position) {

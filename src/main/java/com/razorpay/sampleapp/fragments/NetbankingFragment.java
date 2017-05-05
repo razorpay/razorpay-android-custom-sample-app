@@ -22,7 +22,7 @@ public class NetbankingFragment extends PaymentMethodFragment {
         try {
             JSONObject payload = new JSONObject();
             String bank = bankListSpinner.getSelectedItem().toString();
-            payload.put("bank", paymentMethods.getBankCode(bank));
+            payload.put("bank", getPaymentMethods().getBankCode(bank));
             return payload;
         } catch (JSONException e) {
             return new JSONObject();
@@ -40,7 +40,8 @@ public class NetbankingFragment extends PaymentMethodFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_netbanking, null);
         bankListSpinner = (Spinner) view.findViewById(R.id.spinner_bank_list);
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, paymentMethods.getBankList());
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<String>(getActivity(), R.layout.spinner_item, getPaymentMethods().getBankList());
+        spinnerAdapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         bankListSpinner.setAdapter(spinnerAdapter);
         return view;
     }
