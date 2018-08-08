@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <View android:id="@+id/centerView"
+        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_centerInParent="true"/>
+
+    <LinearLayout android:id="@+id/ll"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@+id/centerView"
+        android:layout_margin="20dp"
+        android:gravity="center">
+
+        <TextView android:id="@+id/vpaTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#00b1e1"
+            android:text="VPA : "/>
+
+        <EditText android:id="@+id/vpa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="VPA"
+            android:textColorHint="#00b1e1"
+            android:textSize="15sp"
+            android:maxLength="16"
+            android:inputType="text"/>
+
+    </LinearLayout>
+
+    <Button android:id="@+id/btn_upi_intent_flow"
+        style="@style/SubmitPaymentMethodDetailsButton"
+        android:text="Intent Flow"
+        android:layout_below="@+id/centerView"
+        android:layout_margin="10dp" />
+
+    <Button android:id="@+id/btn_upi_collect_req"
+        style="@style/SubmitPaymentMethodDetailsButton"
+        android:text="Collect Request"
+        android:layout_below="@+id/btn_upi_intent_flow"
+        android:layout_margin="10dp" />
+
+</RelativeLayout>

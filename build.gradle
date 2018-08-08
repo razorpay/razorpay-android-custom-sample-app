@@ -26,7 +26,7 @@ android {
     buildToolsVersion "25.0.3"
 
     defaultConfig {
-        minSdkVersion 14
+        minSdkVersion 19
         targetSdkVersion 25
     }
 
@@ -44,7 +44,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile (name: "razorpay-android-2.0.1", ext:'aar')
+    compile project(':razorpay-android-3.5.0')
     compile "com.android.support:appcompat-v7:25.3.1"
 
 }
