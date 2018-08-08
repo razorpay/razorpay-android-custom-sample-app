@@ -8,7 +8,6 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/razorpay-android-3.5.0" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

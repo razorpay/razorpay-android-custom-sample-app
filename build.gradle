@@ -10,6 +10,7 @@ buildscript {
 
 allprojects {
     repositories {
+        jcenter()
         flatDir {
             dirs 'libs'
         }
@@ -43,8 +44,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile project(':razorpay-android-3.5.0')
-    compile "com.android.support:appcompat-v7:25.3.1"
-
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile(name:'customui-otpelf', ext:'aar')
 }
