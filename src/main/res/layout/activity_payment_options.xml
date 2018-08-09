@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#00b1e1">
+
+    <RelativeLayout android:id="@+id/outerbox"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="20dp"
+        android:layout_centerInParent="true"
+        android:background="#ffffff">
+
+        <TextView android:id="@+id/heading"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#00b1e1"
+            android:text="Select Payment Method"
+            android:textSize="25sp"
+            android:textColor="#FFFFFF"
+            android:layout_alignParentTop="true"
+            android:gravity="center"
+            android:padding="10dp"/>
+
+        <LinearLayout android:id="@+id/methods_ll"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/heading"
+            android:background="#ffffff">
+
+            <TextView android:id="@+id/card"
+                style="@style/PaymentOptionsTextView"
+                android:layout_weight="0.16"
+                android:text="CARD"/>
+
+            <TextView android:id="@+id/upi"
+                style="@style/PaymentOptionsTextView"
+                android:layout_weight="0.14"
+                android:text="UPI"/>
+
+            <TextView android:id="@+id/netbanking"
+                style="@style/PaymentOptionsTextView"
+                android:layout_weight="0.20"
+                android:text="NET BANKING"/>
+
+            <TextView android:id="@+id/wallet"
+                style="@style/PaymentOptionsTextView"
+                android:layout_weight="0.18"
+                android:text="WALLET"/>
+
+        </LinearLayout>
+
+        <FrameLayout android:id="@+id/frame"
+            android:layout_height="250dp"
+            android:layout_width="match_parent"
+            android:layout_margin="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/methods_ll"/>
+
+    </RelativeLayout>
+
+    <WebView
+        android:id="@+id/payment_webview"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </WebView>
+
+</RelativeLayout>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <LinearLayout android:id="@+id/ll1"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_margin="5dp"
+        android:gravity="center_vertical">
+
+        <TextView android:id="@+id/cardNumberTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#00b1e1"
+            android:text="Card Number :"/>
+
+        <EditText android:id="@+id/cardNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="12"
+            android:hint="Card Number"
+            android:textColorHint="#00b1e1"
+            android:textSize="15sp"
+            android:maxLength="19"
+            android:inputType="number"/>
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/ll2"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@+id/ll1"
+        android:layout_margin="5dp"
+        android:gravity="center_vertical">
+
+        <TextView android:id="@+id/expiryTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#00b1e1"
+            android:text="Expiry : "/>
+
+        <EditText
+            android:id="@+id/expiry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="12/12"
+            android:textColorHint="#00b1e1"
+            android:textSize="15sp"
+            android:ems="4"
+            android:maxLength="5"
+            android:inputType="date"/>
+
+
+        <TextView android:id="@+id/cvvTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:textSize="15sp"
+            android:textColor="#00b1e1"
+            android:text="CVV : "/>
+
+        <EditText
+            android:id="@+id/cvv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="***"
+            android:textColorHint="#00b1e1"
+            android:textSize="15sp"
+            android:ems="4"
+            android:maxLength="4"
+            android:inputType="numberPassword"/>
+
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/ll3"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_below="@+id/ll2"
+        android:layout_margin="5dp"
+        android:gravity="center_vertical">
+
+        <TextView android:id="@+id/nameTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#00b1e1"
+            android:text="Name : "/>
+
+        <EditText android:id="@+id/name"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Card Holder Name"
+            android:textColorHint="#00b1e1"
+            android:textSize="15sp"
+            android:inputType="textPersonName"/>
+
+    </LinearLayout>
+
+
+    <Button android:id="@+id/submit_card_details"
+        style="@style/SubmitPaymentMethodDetailsButton"
+        android:text="Submit"
+        android:layout_below="@+id/ll3"
+        android:layout_margin="20dp"/>
+
+
+</RelativeLayout>

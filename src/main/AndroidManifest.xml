@@ -1,32 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.razorpay.sampleapp"
-          android:versionCode="8"
-          android:versionName="1.5">
+    package="com.razorpay.sampleapp"
+    android:versionCode="8"
+    android:versionName="1.5">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
         android:icon="@mipmap/ic_launcher"
         android:label="Razorpay Sample App">
         <activity
             android:name=".PaymentActivity"
-            android:theme="@style/Theme.App.Base"
             android:label="Razorpay Payment">
-        </activity>
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_live_ILgsfZCZoFIKMb"
-            />
+            android:value="rzp_live_ILgsfZCZoFIKMb" />
+
+        <activity android:name=".PaymentOptions"></activity>
     </application>
+
 </manifest>
