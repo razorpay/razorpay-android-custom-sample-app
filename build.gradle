@@ -23,12 +23,12 @@ apply plugin: 'com.android.application'
 
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    compileSdkVersion 26
+    buildToolsVersion "26.0.3"
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion 26
     }
 
     buildTypes {
@@ -45,6 +45,6 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:appcompat-v7:25.3.1'
-    compile(name:'customui-otpelf', ext:'aar')
+    compile 'com.android.support:appcompat-v7:26+'
+    compile(name: 'razorpay-android-3.8.3', ext: 'aar')
 }

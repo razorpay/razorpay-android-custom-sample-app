@@ -3,11 +3,18 @@
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
+        <compositeConfiguration>
+          <compositeBuild compositeDefinitionSource="SCRIPT" />
+        </compositeConfiguration>
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/customui-otpelf" />
+            <option value="$PROJECT_DIR$/customui-otpelfnew" />
+            <option value="$PROJECT_DIR$/razorpay-android-3.8.0" />
+            <option value="$PROJECT_DIR$/razorpay-android-3.8.1" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

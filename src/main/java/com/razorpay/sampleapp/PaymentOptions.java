@@ -136,7 +136,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
 
             @Override
             public void onError(String error) {
-
+                Log.d("Get Payment error",error);
             }
         });
     }
@@ -150,7 +150,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
         /**
          * Override the RazorpayWebViewClient for your custom hooks
          */
-        razorpay.setWebviewClient(new RazorpayWebViewClient(razorpay) {
+        /*razorpay.setWebviewClient(new RazorpayWebViewClient() {
 
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
@@ -163,7 +163,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
                 super.onPageFinished(view, url);
                 Log.d(TAG, "Custom client onPageFinished");
             }
-        });
+        });*/
     }
 
     private void inflateLists(String result) {
