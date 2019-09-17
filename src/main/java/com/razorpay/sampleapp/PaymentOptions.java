@@ -22,6 +22,7 @@ import android.widget.Toast;
 import com.razorpay.PaymentResultListener;
 import com.razorpay.Razorpay;
 import com.razorpay.RazorpayWebViewClient;
+import com.razorpay.ValidateVpaCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -139,6 +140,22 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
                 Log.d("Get Payment error",error);
             }
         });
+
+        razorpay.isValidVpa("stambatgr5@okhdfcbank", new ValidateVpaCallback() {
+            @Override
+            public void onResponse(boolean b) {
+                if (b)
+                Toast.makeText(PaymentOptions.this, "VPA is valid", Toast.LENGTH_LONG).show();
+                else
+                    Toast.makeText(PaymentOptions.this, "VPA is Not valid", Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onFailure() {
+                Toast.makeText(PaymentOptions.this, "Error in validating", Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
     private void createWebView() {
@@ -288,7 +305,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
                 payload.put("amount", "100");
                 payload.put("contact", "9999999999");
                 payload.put("email", "customer@name.com");
-                //payload.put("upi_app_package_name", "in.org.npci.upiapp");
+                //payload.put("upi_app_package_name", "com.google.android.apps.nbu.paisa.user");
                 payload.put("display_logo", true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -298,8 +315,11 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
                 JSONArray jArray = new JSONArray();
                 jArray.put("in.org.npci.upiapp");
                 jArray.put("com.snapwork.hdfc");
+                payload.put("description","Credits towards consultation");
+                //payload.put("key_id","rzp_test_kEVtCVFWAjUQPG");
                 payload.put("method", "upi");
                 payload.put("_[flow]", "intent");
+                //payload.put("upi_app_package_name","com.google.android.apps.nbu.paisa.user");
                 payload.put("preferred_apps_order", jArray);
                 payload.put("other_apps_order", jArray);
                 sendRequest();
