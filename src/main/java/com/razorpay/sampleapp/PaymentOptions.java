@@ -19,9 +19,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.razorpay.ApplicationDetails;
+import com.razorpay.BaseRazorpay;
 import com.razorpay.PaymentResultListener;
 import com.razorpay.Razorpay;
 import com.razorpay.RazorpayWebViewClient;
+import com.razorpay.RzpUpiSupportedAppsCallback;
 import com.razorpay.ValidateVpaCallback;
 
 import org.json.JSONArray;
@@ -30,6 +33,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class PaymentOptions extends Activity implements PaymentResultListener {
@@ -287,6 +291,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
             try {
                 payload.put("method", "upi");
                 payload.put("vpa", vpa);
+
                 sendRequest();
             } catch (Exception e) {
                 e.printStackTrace();
@@ -302,7 +307,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
 
             try {
                 payload = new JSONObject("{currency: 'INR'}");
-                payload.put("amount", "100");
+                payload.put("amount", "111");
                 payload.put("contact", "9999999999");
                 payload.put("email", "customer@name.com");
                 //payload.put("upi_app_package_name", "com.google.android.apps.nbu.paisa.user");
@@ -319,7 +324,6 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
                 //payload.put("key_id","rzp_test_kEVtCVFWAjUQPG");
                 payload.put("method", "upi");
                 payload.put("_[flow]", "intent");
-                //payload.put("upi_app_package_name","com.google.android.apps.nbu.paisa.user");
                 payload.put("preferred_apps_order", jArray);
                 payload.put("other_apps_order", jArray);
                 sendRequest();
