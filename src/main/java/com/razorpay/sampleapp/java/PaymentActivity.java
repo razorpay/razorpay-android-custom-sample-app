@@ -1,4 +1,4 @@
-package com.razorpay.sampleapp;
+package com.razorpay.sampleapp.java;
 
 import android.app.Activity;
 
@@ -12,6 +12,7 @@ import android.webkit.WebView;
 import org.json.JSONObject;
 
 import com.razorpay.Razorpay;
+import com.razorpay.sampleapp.R;
 
 
 public class PaymentActivity extends Activity{

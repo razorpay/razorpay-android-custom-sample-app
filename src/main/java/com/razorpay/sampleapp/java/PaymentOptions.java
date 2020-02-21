@@ -1,8 +1,7 @@
-package com.razorpay.sampleapp;
+package com.razorpay.sampleapp.java;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,21 +10,15 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.razorpay.ApplicationDetails;
-import com.razorpay.BaseRazorpay;
 import com.razorpay.PaymentResultListener;
 import com.razorpay.Razorpay;
-import com.razorpay.RazorpayWebViewClient;
-import com.razorpay.RzpUpiSupportedAppsCallback;
 import com.razorpay.ValidateVpaCallback;
+import com.razorpay.sampleapp.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -33,7 +26,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public class PaymentOptions extends Activity implements PaymentResultListener {
