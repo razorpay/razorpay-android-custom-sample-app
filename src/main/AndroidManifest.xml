@@ -11,7 +11,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="Razorpay Sample App">
         <activity
-            android:name=".PaymentActivity"
+            android:name=".java.PaymentActivity"
             android:label="Razorpay Payment">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,15 @@
             android:name="com.razorpay.ApiKey"
             android:value="rzp_live_ILgsfZCZoFIKMb" />
 
-        <activity android:name=".PaymentOptions"></activity>
+        <activity android:name=".java.PaymentOptions"></activity>
+        <activity android:name=".kotlin.PaymentActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".kotlin.PaymentOptions" />
     </application>
 
 </manifest>
