@@ -9,11 +9,8 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
-import com.razorpay.BaseRazorpay
+import com.razorpay.*
 import com.razorpay.BaseRazorpay.PaymentMethodsCallback
-import com.razorpay.PaymentResultListener
-import com.razorpay.Razorpay
-import com.razorpay.ValidateVpaCallback
 import com.razorpay.sampleapp.R
 import org.json.JSONArray
 import org.json.JSONException
@@ -44,7 +41,7 @@ class PaymentOptions : Activity(), PaymentResultListener {
                 R.id.card -> {
                     PaymentOptions().frameLayout?.removeAllViews()
                     LayoutInflater.from(PaymentOptions().context).inflate(R.layout.fragment_payment_method_card, PaymentOptions().frameLayout, true)
-                    PaymentOptions().context.findViewById<Button>(R.id.submit_card_details).setOnClickListener { }
+                    PaymentOptions().context.findViewById<Button>(R.id.submit_card_details).setOnClickListener { SubmitCardDetails() }
                 }
                 R.id.upi -> {
                     PaymentOptions().frameLayout?.removeAllViews()
@@ -320,6 +317,25 @@ class PaymentOptions : Activity(), PaymentResultListener {
             e.printStackTrace()
         }
         sendRequest()
+    }
+
+    private fun sendRequestWithDataListener(){
+        razorpay?.submit(payload,object:PaymentResultWithDataListener{
+            override fun onPaymentError(errorCode: Int, errorDescription: String?, paymentData: PaymentData?) {
+
+                webView?.visibility = View.GONE
+                outerBox?.visibility = View.VISIBLE
+                Toast.makeText(this@PaymentOptions, "Error $errorCode : $errorDescription",Toast.LENGTH_LONG).show()
+                Log.e(TAG,"onError: $errorCode : $errorDescription : ${paymentData?.data.toString()}")
+            }
+
+            override fun onPaymentSuccess(rzpPaymentId: String?, paymentData: PaymentData?) {
+                webView?.visibility = View.GONE
+                outerBox?.visibility = View.VISIBLE
+                Toast.makeText(this@PaymentOptions, "Payment Successful: $rzpPaymentId \n data: ${paymentData?.orderId}",Toast.LENGTH_LONG).show()
+            }
+
+        })
     }
 
     private fun sendRequest() {
