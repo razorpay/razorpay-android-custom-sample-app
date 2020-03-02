@@ -15,8 +15,10 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.razorpay.ApplicationDetails;
 import com.razorpay.PaymentResultListener;
 import com.razorpay.Razorpay;
+import com.razorpay.RzpUpiSupportedAppsCallback;
 import com.razorpay.ValidateVpaCallback;
 import com.razorpay.sampleapp.R;
 
@@ -26,6 +28,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class PaymentOptions extends Activity implements PaymentResultListener {
@@ -137,6 +140,13 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
             }
         });
 
+        Razorpay.getAppsWhichSupportUpi(this, new RzpUpiSupportedAppsCallback() {
+            @Override
+            public void onReceiveUpiSupportedApps(List<ApplicationDetails> list) {
+                Log.d("LIST","list");
+            }
+        });
+
         razorpay.isValidVpa("stambatgr5@okhdfcbank", new ValidateVpaCallback() {
             @Override
             public void onResponse(boolean b) {
@@ -151,6 +161,8 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
                 Toast.makeText(PaymentOptions.this, "Error in validating", Toast.LENGTH_LONG).show();
             }
         });
+
+
 
     }
 
