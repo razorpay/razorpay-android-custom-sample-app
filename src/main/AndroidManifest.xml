@@ -22,17 +22,10 @@
 
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_live_ILgsfZCZoFIKMb" />
+            android:value="rzp_test_sGTn6NdtUkHekP" />
 
-        <activity android:name=".java.PaymentOptions"></activity>
-        <activity android:name=".kotlin.PaymentActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        <activity android:name=".java.PaymentOptions" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".kotlin.PaymentOptions" />
     </application>
 
 </manifest>

@@ -9,11 +9,7 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
-import com.razorpay.BaseRazorpay
-import com.razorpay.BaseRazorpay.PaymentMethodsCallback
-import com.razorpay.PaymentResultListener
-import com.razorpay.Razorpay
-import com.razorpay.ValidateVpaCallback
+import com.razorpay.*
 import com.razorpay.sampleapp.R
 import org.json.JSONArray
 import org.json.JSONException
@@ -323,7 +319,7 @@ class PaymentOptions : Activity(), PaymentResultListener {
     }
 
     private fun sendRequest() {
-        razorpay?.validateFields(payload, object : BaseRazorpay.ValidationListener {
+        razorpay?.validateFields(payload, object : ValidationListener {
             override fun onValidationError(error: MutableMap<String, String>?) {
                 Log.d(TAG, "Validation failed: " + error?.get("field"))
                 Toast.makeText(this@PaymentOptions, "Validation: " + error?.get("field"), Toast.LENGTH_LONG).show()
