@@ -1,6 +1,7 @@
 package com.razorpay.sampleapp.kotlin
 
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,7 +11,6 @@ import android.webkit.WebView
 import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
 import com.razorpay.*
-import com.razorpay.BaseRazorpay.PaymentMethodsCallback
 import com.razorpay.sampleapp.R
 import org.json.JSONArray
 import org.json.JSONException
@@ -101,44 +101,71 @@ class PaymentOptions : Activity(), PaymentResultListener {
 
 
     private fun createWebView() {
-        razorpay?.setWebView(webView)
     }
 
     private fun initRazorpay() {
         razorpay = Razorpay(this)
 
-        razorpay?.getPaymentMethods(object : PaymentMethodsCallback {
-            override fun onPaymentMethodsReceived(result: String?) {
-                /**
-                 * This returns JSON data
-                 * The structure of this data can be seen at the following link:
-                 * https://api.razorpay.com/v1/methods?key_id=rzp_test_1DP5mmOlF5G5ag
-                 *
-                 */
-                Log.d("Result", "" + result)
-                inflateLists(result)
+        razorpay?.setWebView(webView)
+
+
+        try {
+            payload.put("amount", "111")
+            payload.put("contact", "9999999999")
+            payload.put("email", "customer@name.com")
+            //payload.put("upi_app_package_name", "com.google.android.apps.nbu.paisa.user");
+            payload.put("display_logo", true)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        try {
+            val jArray = JSONArray()
+            jArray.put("in.org.npci.upiapp")
+            jArray.put("com.snapwork.hdfc")
+            payload.put("description", "Credits towards consultation")
+            //payload.put("key_id","rzp_test_kEVtCVFWAjUQPG");
+            payload.put("method", "upi")
+            payload.put("_[flow]", "intent")
+            payload.put("preferred_apps_order", jArray)
+            payload.put("other_apps_order", jArray)
+            sendRequest()
+            }catch (ex: Exception){
+
             }
-
-            override fun onError(error: String?) {
-                Log.e("Get Payment error", error)
-            }
-        })
-
-        razorpay?.isValidVpa("stambatgr5@okhdfcbank", object : ValidateVpaCallback {
-
-            override fun onFailure() {
-                Toast.makeText(this@PaymentOptions, "Error validating VPA", Toast.LENGTH_LONG).show()
-            }
-
-            override fun onResponse(b: Boolean) {
-                if (b) {
-                    Toast.makeText(this@PaymentOptions, "VPA is valid", Toast.LENGTH_LONG).show()
-                } else {
-                    Toast.makeText(this@PaymentOptions, "VPA is Not Valid", Toast.LENGTH_LONG).show()
-                }
-            }
-
-        })
+//        razorpay?.getPaymentMethods(object : PaymentMethodsCallback {
+//            override fun onPaymentMethodsReceived(result: String?) {
+//                /**
+//                 * This returns JSON data
+//                 * The structure of this data can be seen at the following link:
+//                 * https://api.razorpay.com/v1/methods?key_id=rzp_test_1DP5mmOlF5G5ag
+//                 *
+//                 */
+//                Log.d("Result", "" + result)
+//                inflateLists(result)
+//            }
+//
+//            override fun onError(error: String?) {
+//                Log.e("Get Payment error", error)
+//            }
+//        })
+//
+//        razorpay?.isValidVpa("stambatgr5@okhdfcbank", object : ValidateVpaCallback {
+//            override fun onResponse(p0: JSONObject?) {
+//            }
+//
+//            override fun onFailure() {
+//                Toast.makeText(this@PaymentOptions, "Error validating VPA", Toast.LENGTH_LONG).show()
+//            }
+//
+////            override fun onResponse(b: Boolean) {
+////                if (b) {
+////                    Toast.makeText(this@PaymentOptions, "VPA is valid", Toast.LENGTH_LONG).show()
+////                } else {
+////                    Toast.makeText(this@PaymentOptions, "VPA is Not Valid", Toast.LENGTH_LONG).show()
+////                }
+////            }
+//
+//        })
     }
 
     private fun inflateLists(result: String?) {
@@ -339,7 +366,7 @@ class PaymentOptions : Activity(), PaymentResultListener {
     }
 
     private fun sendRequest() {
-        razorpay?.validateFields(payload, object : BaseRazorpay.ValidationListener {
+        razorpay?.validateFields(payload, object : ValidationListener {
             override fun onValidationError(error: MutableMap<String, String>?) {
                 Log.d(TAG, "Validation failed: " + error?.get("field"))
                 Toast.makeText(this@PaymentOptions, "Validation: " + error?.get("field"), Toast.LENGTH_LONG).show()
@@ -389,6 +416,11 @@ class PaymentOptions : Activity(), PaymentResultListener {
         webView?.visibility = View.GONE
         outerBox?.visibility = View.VISIBLE
         Toast.makeText(this@PaymentOptions, "Payment Successful: $rzpPaymentId",Toast.LENGTH_LONG).show()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        this.razorpay?.onActivityResult(requestCode, resultCode, data)
     }
 }
 
