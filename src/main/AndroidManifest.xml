@@ -11,28 +11,37 @@
         android:icon="@mipmap/ic_launcher"
         android:label="Razorpay Sample App">
         <activity
-            android:name=".java.PaymentActivity"
-            android:label="Razorpay Payment">
+            android:name=".kotlin.PaymentOptionsV2"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:exported="false" />
+        <activity
+            android:name=".main.MainActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".java.PaymentActivity"
+            android:exported="true"
+            android:label="Razorpay Payment"></activity>
 
         <meta-data
             android:name="com.razorpay.ApiKey"
-            android:value="rzp_live_ILgsfZCZoFIKMb" />
+            android:value="rzp_test_1DP5mmOlF5G5ag" />
 
-        <activity android:name=".java.PaymentOptions"></activity>
-        <activity android:name=".kotlin.PaymentActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".kotlin.PaymentOptions" />
+        <activity
+            android:name=".java.PaymentOptions"
+            android:exported="true" />
+        <activity
+            android:name=".kotlin.PaymentActivity"
+            android:exported="true"></activity>
+        <activity
+            android:name=".kotlin.PaymentOptions"
+            android:exported="true" />
     </application>
 
 </manifest>

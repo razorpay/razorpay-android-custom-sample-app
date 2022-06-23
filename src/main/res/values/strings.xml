@@ -1,3 +1,12 @@
 <resources>
     <string name="title_activity_main">Custom UI Sample App</string>
+    <string name="after_selecting_one_of_the_options_you_can_add_your_own_data_here_or_paste_a_jsonobject_here_directly">After selecting one of the options, you can add your own data here. Or paste a JSONObject here directly</string>
+    <string name="pay_with_razorpay">Pay with Razorpay</string>
+    <string name="enter_api_key_here">Enter API Key here</string>
+    <string name="wallet">Wallet</string>
+    <string name="netbanking">Netbanking</string>
+    <string name="upi_collect">UPI Collect</string>
+    <string name="upi_intent">UPI Intent</string>
+    <string name="card">Card</string>
+    <string name="select_one_of_the_options_below_to_get_started">Select one of the options below to get started</string>
 </resources>
