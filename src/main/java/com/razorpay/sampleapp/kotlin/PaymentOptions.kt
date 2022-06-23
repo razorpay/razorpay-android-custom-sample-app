@@ -9,11 +9,7 @@ import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.*
 import android.widget.AdapterView.OnItemClickListener
-import com.razorpay.BaseRazorpay
-import com.razorpay.BaseRazorpay.PaymentMethodsCallback
-import com.razorpay.PaymentResultListener
-import com.razorpay.Razorpay
-import com.razorpay.ValidateVpaCallback
+import com.razorpay.*
 import com.razorpay.sampleapp.R
 import org.json.JSONArray
 import org.json.JSONException
@@ -40,11 +36,12 @@ class PaymentOptions : Activity(), PaymentResultListener {
 
     private class MethodSelected : View.OnClickListener {
         override fun onClick(p0: View?) {
+            Log.d("ID","CLICK")
             when (p0?.id) {
                 R.id.card -> {
                     PaymentOptions().frameLayout?.removeAllViews()
                     LayoutInflater.from(PaymentOptions().context).inflate(R.layout.fragment_payment_method_card, PaymentOptions().frameLayout, true)
-                    PaymentOptions().context.findViewById<Button>(R.id.submit_card_details).setOnClickListener { }
+                    PaymentOptions().context.findViewById<Button>(R.id.submit_card_details).setOnClickListener { SubmitCardDetails() }
                 }
                 R.id.upi -> {
                     PaymentOptions().frameLayout?.removeAllViews()
@@ -86,7 +83,20 @@ class PaymentOptions : Activity(), PaymentResultListener {
 
         findViewById<TextView>(R.id.card).setOnClickListener { MethodSelected() }
         findViewById<TextView>(R.id.upi).setOnClickListener { MethodSelected() }
-        findViewById<TextView>(R.id.netbanking).setOnClickListener { MethodSelected() }
+        findViewById<TextView>(R.id.netbanking).setOnClickListener {
+            frameLayout?.removeAllViews()
+            LayoutInflater.from(this).inflate(R.layout.fragment_method_netbanking_wallet_list, PaymentOptions().frameLayout, true)
+
+            listView = findViewById(R.id.method_available_options_list)
+            listView?.adapter = banksListAdapter
+
+            razorpay?.changeApiKey("rzp_live_ILgsfZCZoFIKMb")
+            listView?.setOnItemClickListener { parent, view, position, id ->
+                run {
+                    PaymentOptions().submitNetbankingDetails(PaymentOptions().bankCodesList[position])
+                }
+            }
+        }
         findViewById<TextView>(R.id.wallet).setOnClickListener { MethodSelected() }
 
         webView = findViewById(R.id.payment_webview)
@@ -123,24 +133,19 @@ class PaymentOptions : Activity(), PaymentResultListener {
             }
 
             override fun onError(error: String?) {
-                Log.e("Get Payment error", error)
+                if (error != null) {
+                    Log.e("Get Payment error", error)
+                }
             }
         })
 
         razorpay?.isValidVpa("stambatgr5@okhdfcbank", object : ValidateVpaCallback {
+            override fun onResponse(p0: JSONObject?) {
+            }
 
             override fun onFailure() {
                 Toast.makeText(this@PaymentOptions, "Error validating VPA", Toast.LENGTH_LONG).show()
             }
-
-            override fun onResponse(b: Boolean) {
-                if (b) {
-                    Toast.makeText(this@PaymentOptions, "VPA is valid", Toast.LENGTH_LONG).show()
-                } else {
-                    Toast.makeText(this@PaymentOptions, "VPA is Not Valid", Toast.LENGTH_LONG).show()
-                }
-            }
-
         })
     }
 
@@ -273,7 +278,6 @@ class PaymentOptions : Activity(), PaymentResultListener {
                 val jArray = JSONArray()
                 jArray.put("in.org.npci.upiapp")
                 jArray.put("com.snapwork.hdfc")
-                payload.put("description", "Credits towards consultation")
                 //payload.put("key_id","rzp_test_kEVtCVFWAjUQPG");
                 payload.put("method", "upi")
                 payload.put("_[flow]", "intent")
@@ -323,7 +327,7 @@ class PaymentOptions : Activity(), PaymentResultListener {
     }
 
     private fun sendRequest() {
-        razorpay?.validateFields(payload, object : BaseRazorpay.ValidationListener {
+        razorpay?.validateFields(payload, object : ValidationListener {
             override fun onValidationError(error: MutableMap<String, String>?) {
                 Log.d(TAG, "Validation failed: " + error?.get("field"))
                 Toast.makeText(this@PaymentOptions, "Validation: " + error?.get("field"), Toast.LENGTH_LONG).show()

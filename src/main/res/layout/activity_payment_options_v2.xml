@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#02042b"
+    tools:context=".kotlin.PaymentOptionsV2">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_outer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        >
+        
+        <ImageView
+            android:id="@+id/iv_small_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_small_logo"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="5dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/select_one_of_the_options_below_to_get_started"
+            android:textColor="#ffffff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toEndOf="@id/iv_small_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/iv_small_logo"
+            app:layout_constraintBottom_toBottomOf="@id/iv_small_logo"
+            android:layout_marginStart="10dp"
+            />
+
+        <HorizontalScrollView
+            android:id="@+id/sv_modes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_small_logo"
+            >
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+
+                <Button
+                    android:background="@drawable/bg_button_lang"
+                    android:id="@+id/btn_card"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/card"
+                    />
+
+                <Button
+                    android:background="@drawable/bg_button_lang"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:id="@+id/btn_upi_intent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/upi_intent"/>
+
+                <Button
+                    android:background="@drawable/bg_button_lang"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:id="@+id/btn_upi_collect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/upi_collect"
+
+                    />
+
+                <Button
+                    android:background="@drawable/bg_button_lang"
+                    android:paddingStart="5dp"
+                    android:paddingEnd="5dp"
+                    android:id="@+id/btn_netbanking"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/netbanking"
+
+                    />
+
+                <Button
+                    android:background="@drawable/bg_button_lang"
+
+                    android:id="@+id/btn_wallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/wallet"
+                    />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </HorizontalScrollView>
+
+
+        <EditText
+            android:id="@+id/et_vpa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:hint="Enter VPA to validate"
+            android:backgroundTint="#ffffff"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:layout_marginTop="10dp"
+            app:layout_constraintEnd_toStartOf="@id/iv_vpa"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/sv_modes" />
+
+        <ImageView
+            android:id="@+id/iv_vpa"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:paddingStart="20dp"
+            android:paddingEnd="20dp"
+            android:src="@drawable/ic_right_arrow"
+            app:layout_constraintBottom_toBottomOf="@id/et_vpa"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/et_vpa" />
+
+        <EditText
+            android:id="@+id/et_key"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/enter_api_key_here"
+            android:backgroundTint="#ffffff"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            app:layout_constraintTop_toBottomOf="@id/et_vpa" />
+
+        <EditText
+            android:id="@+id/et_options_payload"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:hint="@string/after_selecting_one_of_the_options_you_can_add_your_own_data_here_or_paste_a_jsonobject_here_directly"
+            android:textColor="#ffffff"
+            android:textColorHint="#ffffff"
+            android:backgroundTint="#ffffff"
+            app:layout_constraintBottom_toTopOf="@id/btn_pay"
+            app:layout_constraintTop_toBottomOf="@id/et_key" />
+
+        <Button
+            android:background="@drawable/bg_button_lang"
+            app:layout_constraintStart_toEndOf="@id/glv_50"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="10dp"
+            android:id="@+id/btn_pay_data"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Pay - With Data"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <Button
+            android:background="@drawable/bg_button_lang"
+            app:layout_constraintEnd_toStartOf="@id/glv_50"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_margin="10dp"
+            android:id="@+id/btn_pay"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Pay - Without Data"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/glv_50"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <WebView
+        android:id="@+id/webview"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

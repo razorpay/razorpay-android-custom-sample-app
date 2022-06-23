@@ -16,7 +16,6 @@ import com.razorpay.sampleapp.R;
 
 
 public class PaymentActivity extends Activity{
-    private Razorpay razorpay;
     private Activity activity;
     private WebView webview;
     private ViewGroup outerBox;

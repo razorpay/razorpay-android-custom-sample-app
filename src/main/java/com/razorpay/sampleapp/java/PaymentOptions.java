@@ -15,9 +15,11 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.razorpay.PaymentMethodsCallback;
 import com.razorpay.PaymentResultListener;
 import com.razorpay.Razorpay;
 import com.razorpay.ValidateVpaCallback;
+import com.razorpay.ValidationListener;
 import com.razorpay.sampleapp.R;
 
 import org.json.JSONArray;
@@ -117,7 +119,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
     private void initRazorpay() {
         razorpay = new Razorpay(this);
 
-        razorpay.getPaymentMethods(new Razorpay.PaymentMethodsCallback() {
+        razorpay.getPaymentMethods(new PaymentMethodsCallback() {
             @Override
             public void onPaymentMethodsReceived(String result) {
 
@@ -138,12 +140,11 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
         });
 
         razorpay.isValidVpa("stambatgr5@okhdfcbank", new ValidateVpaCallback() {
+
+
             @Override
-            public void onResponse(boolean b) {
-                if (b)
-                Toast.makeText(PaymentOptions.this, "VPA is valid", Toast.LENGTH_LONG).show();
-                else
-                    Toast.makeText(PaymentOptions.this, "VPA is Not valid", Toast.LENGTH_LONG).show();
+            public void onResponse(JSONObject jsonObject) {
+                    Toast.makeText(PaymentOptions.this, jsonObject.toString(), Toast.LENGTH_LONG).show();
             }
 
             @Override
@@ -368,7 +369,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
     }
 
     private void sendRequest() {
-        razorpay.validateFields(payload, new Razorpay.ValidationListener() {
+        razorpay.validateFields(payload, new ValidationListener() {
             @Override
             public void onValidationSuccess() {
                 try {
