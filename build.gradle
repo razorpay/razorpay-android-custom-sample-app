@@ -54,14 +54,9 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    //noinspection GradleCompatible
-//    implementation(name:'razorpay-android-3.8.8', ext: 'aar')
-    //implementation(name:'PayWithAmazon', ext: 'aar')
-    //noinspection GradleCompatible
+
     implementation 'com.razorpay:customui:3.9.11'
     implementation 'androidx.browser:browser:1.0.0'
-    //implementation(name: 'razorpay-amazonpay-1.3.0', ext: 'aar')
-    implementation(name: 'tez-client-api-0.9.4', ext: 'aar')
     implementation 'com.google.android.gms:play-services-tasks:15.0.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.0'
