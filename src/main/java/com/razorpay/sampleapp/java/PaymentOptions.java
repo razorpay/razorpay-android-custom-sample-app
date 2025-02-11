@@ -247,7 +247,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
                 payload.put("contact", "9999999999");
                 payload.put("email", "customer@name.com");
             } catch (Exception e) {
-                e.printStackTrace();
+                
             }
 
             try {
@@ -259,7 +259,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
                 payload.put("card[cvv]", cvv);
                 sendRequest();
             } catch (Exception e) {
-                e.printStackTrace();
+                
             }
         }
 
@@ -277,7 +277,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
                 payload.put("contact", "9999999999");
                 payload.put("email", "customer@name.com");
             } catch (Exception e) {
-                e.printStackTrace();
+                
             }
 
 
@@ -287,7 +287,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
 
                 sendRequest();
             } catch (Exception e) {
-                e.printStackTrace();
+                
             }
         }
     }
@@ -306,7 +306,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
                 //payload.put("upi_app_package_name", "com.google.android.apps.nbu.paisa.user");
                 payload.put("display_logo", true);
             } catch (Exception e) {
-                e.printStackTrace();
+                
             }
 
             try {
@@ -321,7 +321,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
                 payload.put("other_apps_order", jArray);
                 sendRequest();
             } catch (Exception e) {
-                e.printStackTrace();
+                
             }
         }
     }
@@ -334,7 +334,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
             payload.put("contact", "9999999999");
             payload.put("email", "customer@name.com");
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
 
 
@@ -343,7 +343,7 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
             payload.put("bank", bankName);
             sendRequest();
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
     }
 
@@ -356,14 +356,14 @@ public class PaymentOptions extends Activity implements PaymentResultListener {
             payload.put("contact", "9999999999");
             payload.put("email", "customer@name.com");
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
 
         try {
             payload.put("method", "wallet");
             payload.put("wallet", walletName);
         } catch (Exception e) {
-            e.printStackTrace();
+            
         }
         sendRequest();
     }
